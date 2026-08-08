@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Deterministic DCT parameter candidates for paired image-edit evaluation.",
+  "claimBoundary": "These are hypotheses. A candidate is not an effective protection unless it passes visual gates and improves a named model evaluation.",
+  "variants": [
+    {
+      "id": "dct-baseline",
+      "label": "DCT baseline: Q75, two coefficients, strength 1.5",
+      "mode": "dct-research",
+      "dctOptions": {
+        "quality": 75,
+        "strength": 1.5,
+        "coefficientsPerBlock": 2
+      }
+    },
+    {
+      "id": "dct-low-wide",
+      "label": "DCT low-wide: Q75, four coefficients, strength 0.8",
+      "mode": "dct-research",
+      "dctOptions": {
+        "quality": 75,
+        "strength": 0.8,
+        "coefficientsPerBlock": 4
+      }
+    },
+    {
+      "id": "dct-mid-wide",
+      "label": "DCT mid-wide: Q75, four coefficients, strength 1.2",
+      "mode": "dct-research",
+      "dctOptions": {
+        "quality": 75,
+        "strength": 1.2,
+        "coefficientsPerBlock": 4
+      }
+    },
+    {
+      "id": "dct-q65-balanced",
+      "label": "DCT Q65 balanced: three coefficients, strength 1.0",
+      "mode": "dct-research",
+      "dctOptions": {
+        "quality": 65,
+        "strength": 1,
+        "coefficientsPerBlock": 3
+      }
+    }
+  ]
+}

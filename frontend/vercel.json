@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/protect.html",
+      "destination": "/"
+    }
+  ]
+}

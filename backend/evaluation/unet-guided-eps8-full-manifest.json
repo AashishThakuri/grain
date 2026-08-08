@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "compilerVersion": "research-only-instruct-unet-dct-guided",
+  "purpose": "Full prompt-family evaluation of the visually valid guided U-Net DCT candidate",
+  "claimBoundary": "Research only. This candidate was optimized for one prompt and model configuration. It cannot establish protection against closed models, other images, or arbitrary prompts.",
+  "cases": [
+    {
+      "id": "001-aesthetic-01",
+      "originalSource": "../frontend/public/img/aesthetic-01.jpg",
+      "conditions": [
+        {
+          "id": "clean",
+          "kind": "control",
+          "image": "D:/grain-eval-reports/vae-dct/aesthetic-01-clean.png",
+          "compilerMetrics": null
+        },
+        {
+          "id": "unet-guided-eps8",
+          "kind": "research",
+          "image": "D:/grain-eval-reports/unet-dct/aesthetic-01-guided-eps8.png",
+          "compilerMetrics": null
+        }
+      ],
+      "prompts": [
+        {
+          "id": "clothing-change",
+          "family": "clothing",
+          "instruction": "Change the person's shirt into a red leather jacket."
+        },
+        {
+          "id": "context-replacement",
+          "family": "context",
+          "instruction": "Place the person in a snowy mountain landscape."
+        },
+        {
+          "id": "age-edit",
+          "family": "identity",
+          "instruction": "Make the person look twenty years older."
+        },
+        {
+          "id": "style-transfer",
+          "family": "style",
+          "instruction": "Turn this photo into a watercolor painting."
+        },
+        {
+          "id": "object-addition",
+          "family": "object",
+          "instruction": "Add dark sunglasses to the person's face."
+        }
+      ],
+      "seeds": [101, 202]
+    }
+  ]
+}

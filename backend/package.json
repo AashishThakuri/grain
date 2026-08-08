@@ -1,0 +1,22 @@
+{
+  "name": "grain-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "node src/server.js",
+    "test": "node --test",
+    "benchmark": "node src/cli/benchmark.js",
+    "benchmark:suite": "node src/cli/benchmark-suite.js",
+    "benchmark:prepare": "node src/cli/prepare-model-benchmark.js",
+    "benchmark:dct-variants": "node src/cli/evaluate-dct-variants.js",
+    "benchmark:score-model": "node src/cli/score-model-evaluation.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "multer": "^2.2.0",
+    "sharp": "^0.33.5"
+  }
+}

@@ -1,0 +1,22 @@
+# Dependencies and generated output
+**/node_modules/
+**/dist/
+**/.vite/
+
+# Local services, temporary files, and experiments
+tmp/
+backend/reports/
+backend/evaluation/.cache/
+*.log
+
+# Local configuration and Vercel state
+.env
+.env.*
+!.env.example
+.vercel/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

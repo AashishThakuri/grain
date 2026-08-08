@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "compilerVersion": "research-only-instruct-unet-dct-guided",
+  "purpose": "Matched prompt-targeted U-Net DCT visual-budget comparison",
+  "claimBoundary": "Research only. The candidates target one open editor, one prompt, and one seed. Results cannot establish closed-model or cross-prompt protection.",
+  "cases": [
+    {
+      "id": "001-aesthetic-01",
+      "originalSource": "../frontend/public/img/aesthetic-01.jpg",
+      "conditions": [
+        {
+          "id": "clean",
+          "kind": "control",
+          "image": "D:/grain-eval-reports/vae-dct/aesthetic-01-clean.png",
+          "compilerMetrics": null
+        },
+        {
+          "id": "unet-guided-eps2",
+          "kind": "research",
+          "image": "D:/grain-eval-reports/unet-dct/aesthetic-01-guided-eps2.png",
+          "compilerMetrics": null
+        },
+        {
+          "id": "unet-guided-eps8",
+          "kind": "research",
+          "image": "D:/grain-eval-reports/unet-dct/aesthetic-01-guided-eps8.png",
+          "compilerMetrics": null
+        },
+        {
+          "id": "unet-guided-eps16",
+          "kind": "research-upper-bound",
+          "image": "D:/grain-eval-reports/unet-dct/aesthetic-01-guided-eps16.png",
+          "compilerMetrics": null
+        }
+      ],
+      "prompts": [
+        {
+          "id": "clothing-change",
+          "family": "clothing",
+          "instruction": "Change the person's shirt into a red leather jacket."
+        }
+      ],
+      "seeds": [101]
+    }
+  ]
+}

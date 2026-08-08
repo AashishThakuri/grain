@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "prompts": [
+    {
+      "id": "clothing-change",
+      "family": "clothing",
+      "instruction": "Change the person's shirt into a red leather jacket."
+    },
+    {
+      "id": "context-replacement",
+      "family": "context",
+      "instruction": "Place the person in a snowy mountain landscape."
+    },
+    {
+      "id": "age-edit",
+      "family": "identity",
+      "instruction": "Make the person look twenty years older."
+    },
+    {
+      "id": "style-transfer",
+      "family": "style",
+      "instruction": "Turn this photo into a watercolor painting."
+    },
+    {
+      "id": "object-addition",
+      "family": "object",
+      "instruction": "Add dark sunglasses to the person's face."
+    }
+  ]
+}

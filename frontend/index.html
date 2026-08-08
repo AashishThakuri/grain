@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grain</title>
+    <link rel="icon" type="image/png" href="/brand/grain-logo.png">
+    <style>
+      body {
+        margin: 0;
+        background: #ffffff;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      .loading-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        display: grid;
+        place-items: center;
+        background: #ffffff;
+        color: #252525;
+        font-family: system-ui, sans-serif;
+      }
+
+      .loader-mark {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 5.75rem;
+        height: 5.75rem;
+      }
+
+      .loader-mark::before,
+      .loader-mark::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 0.0625rem solid rgba(0, 0, 0, 0.12);
+      }
+
+      .loader-mark::after {
+        border-color: #252525 transparent transparent transparent;
+        animation: loader-spin 1s linear infinite;
+      }
+
+      .loader-mark i {
+        position: absolute;
+        width: 0.4375rem;
+        height: 0.4375rem;
+        border-radius: 50%;
+        background: #252525;
+        transform: translateY(-2.75rem);
+        animation: loader-pulse 1.2s ease-in-out infinite;
+      }
+
+      .loader-logo {
+        width: 2.8125rem;
+        height: 2.8125rem;
+        object-fit: contain;
+      }
+
+      @keyframes loader-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes loader-pulse {
+        0%,
+        100% {
+          opacity: 0.35;
+          transform: translateY(-2.75rem) scale(0.8);
+        }
+
+        50% {
+          opacity: 1;
+          transform: translateY(-2.75rem) scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body class="is-loading">
+    <div id="loading-screen" class="loading-screen" aria-label="Loading gallery" role="status">
+      <div class="loader-mark">
+        <img class="loader-logo" src="/brand/grain-logo.png" alt="">
+        <i></i>
+      </div>
+    </div>
+
+    <div id="canvas-container"></div>
+    <div id="ambient-layer" class="ambient-layer" aria-hidden="true" hidden></div>
+
+    <header id="site-nav" class="site-nav" hidden>
+      <a class="nav-brand" href="/" aria-label="grain home">
+        <img class="brand-logo" src="/brand/grain-logo.png" alt="">
+        <img class="brand-wordmark" src="/brand/grain-wordmark.png" alt="grain">
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#problem" data-story-section="Problem">Problem</a>
+        <a href="#how-it-works" data-story-section="How It Works">How It Works</a>
+        <a href="#testing" data-story-section="Testing">Testing</a>
+        <a href="#product" data-story-section="Product">Product</a>
+        <a href="#security" data-story-section="Security">Security</a>
+      </nav>
+
+      <aside id="nav-map" class="nav-map" aria-label="Live scroll preview">
+        <span class="nav-map__nav"></span>
+        <span id="nav-map-images" class="nav-map__region nav-map__region--images"></span>
+        <span id="nav-map-copy" class="nav-map__region nav-map__region--copy"></span>
+        <span id="nav-map-proof" class="nav-map__region nav-map__region--proof"></span>
+      </aside>
+    </header>
+
+    <section id="hero-copy" class="hero-copy" aria-label="Product positioning" hidden>
+      <div class="story-meta" aria-live="polite">
+        <span id="story-index" hidden>Home</span>
+        <span id="story-section">Opening</span>
+        <span id="story-frame">Pre-public defense</span>
+      </div>
+      <h1 id="story-title">The imperfection that protects.</h1>
+      <p id="story-body">GRAIN records a fidelity-preserving protection signal before photos go online, making consent and model-by-model testing part of the publishing process.</p>
+      <div class="proof-mini" aria-label="Protection proof">
+        <span id="proof-kicker" class="proof-kicker">Protection proof</span>
+        <div id="proof-visual" class="proof-visual proof-visual--pipeline"></div>
+        <span id="proof-readout" class="proof-readout">Edit confidence drops / photo stays intact</span>
+      </div>
+    </section>
+
+    <aside id="story-progress" class="story-progress" aria-label="Story progress" hidden>
+      <span class="story-progress__label">Home</span>
+      <span class="story-progress__track">
+        <span class="story-progress__bar"></span>
+      </span>
+      <span class="story-progress__count">00</span>
+    </aside>
+
+    <button id="scroll-toggle" class="scroll-toggle" type="button" aria-label="Toggle the landing-page story scroll" hidden>
+      <span class="scroll-toggle__segment" data-action="scroll">Scroll</span>
+    </button>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

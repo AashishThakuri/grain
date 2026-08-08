@@ -1,0 +1,474 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  color: #f5f5f0;
+  background: #050505;
+  font-family: Inter, "SF Pro Display", "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 72% 24%, rgba(255, 255, 255, 0.08), transparent 26rem),
+    radial-gradient(circle at 12% 78%, rgba(255, 255, 255, 0.05), transparent 22rem),
+    #050505;
+  color: #f5f5f0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.18) 0.035rem, transparent 0.0475rem),
+    repeating-linear-gradient(0deg, transparent 0 0.42rem, rgba(255, 255, 255, 0.028) 0.42rem 0.47rem);
+  background-size: 0.82rem 0.82rem, 100% 0.86rem;
+  opacity: 0.2;
+}
+
+.protect-shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(2rem, 5vh, 4.5rem);
+  min-height: 100vh;
+  padding: 1.45rem clamp(1.2rem, 3.4vw, 3.2rem) 2rem;
+}
+
+.protect-nav,
+.protect-hero,
+.protect-stage,
+.result-panel {
+  width: min(100%, 86rem);
+  margin-inline: auto;
+}
+
+.protect-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 4.75rem;
+}
+
+.protect-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.protect-brand img:first-child {
+  width: 3.7rem;
+  height: 3.7rem;
+  object-fit: contain;
+}
+
+.protect-brand img:last-child {
+  width: clamp(5.5rem, 8vw, 7.4rem);
+  height: auto;
+  object-fit: contain;
+  filter: invert(1);
+}
+
+.protect-status,
+.protect-kicker,
+.preview-label,
+.result-panel span,
+.protect-note,
+.drop-zone small,
+.control-grid span {
+  font-family: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  letter-spacing: 0.05rem;
+}
+
+.protect-status {
+  padding: 0.72rem 1rem;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.16);
+  border-radius: 999rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(245, 245, 240, 0.64);
+  font-size: 0.72rem;
+}
+
+.protect-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.94fr) minmax(21rem, 0.76fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+  padding-top: clamp(1rem, 4vh, 3rem);
+}
+
+.protect-copy {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.protect-kicker {
+  color: rgba(245, 245, 240, 0.52);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.protect-copy h1 {
+  max-width: 8.8ch;
+  color: #f5f5f0;
+  font-size: clamp(4rem, 10vw, 9.4rem);
+  font-weight: 760;
+  line-height: 0.94;
+  letter-spacing: 0;
+}
+
+.protect-copy p {
+  max-width: 42rem;
+  color: rgba(245, 245, 240, 0.68);
+  font-size: clamp(1.04rem, 1.5vw, 1.34rem);
+  line-height: 1.65;
+}
+
+.protect-console {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.14);
+  border-radius: 0.9rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 36%),
+    rgba(12, 12, 12, 0.82);
+  box-shadow: 0 1.6rem 4rem rgba(0, 0, 0, 0.32);
+}
+
+.drop-zone {
+  position: relative;
+  display: grid;
+  min-height: 14rem;
+  place-items: center;
+  gap: 0.7rem;
+  padding: 1.4rem;
+  overflow: hidden;
+  border: 0.0625rem dashed rgba(245, 245, 240, 0.28);
+  border-radius: 0.65rem;
+  background:
+    linear-gradient(90deg, transparent 0 48%, rgba(255, 255, 255, 0.08) 48% 52%, transparent 52%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.035) 0 0.16rem, transparent 0.16rem 0.42rem);
+  text-align: center;
+  cursor: pointer;
+}
+
+.drop-zone.is-hot {
+  border-color: rgba(245, 245, 240, 0.72);
+}
+
+.drop-zone input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.drop-zone__mark {
+  width: 4.6rem;
+  aspect-ratio: 1;
+  border: 0.0625rem solid rgba(245, 245, 240, 0.24);
+  background:
+    radial-gradient(circle, rgba(245, 245, 240, 0.74) 0.045rem, transparent 0.0575rem),
+    radial-gradient(circle, rgba(245, 245, 240, 0.16) 0.06rem, transparent 0.075rem);
+  background-size: 0.34rem 0.34rem, 0.72rem 0.72rem;
+  animation: protect-shift 2.8s steps(4) infinite;
+}
+
+.drop-zone strong {
+  position: relative;
+  z-index: 1;
+  font-size: 1.25rem;
+}
+
+.drop-zone small {
+  position: relative;
+  z-index: 1;
+  max-width: 20rem;
+  color: rgba(245, 245, 240, 0.52);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.control-grid label {
+  display: grid;
+  gap: 0.48rem;
+}
+
+.control-grid span {
+  color: rgba(245, 245, 240, 0.52);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.control-grid select {
+  width: 100%;
+  min-height: 3.15rem;
+  padding: 0 0.9rem;
+  border: 0.0625rem solid rgba(245, 245, 240, 0.16);
+  border-radius: 0.5rem;
+  background: #111111;
+  color: #f5f5f0;
+  font: inherit;
+}
+
+.protect-button {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  gap: 0.16rem;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  font-family: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.protect-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 2.2rem);
+  z-index: 2;
+  width: 0.24rem;
+  height: 1.45rem;
+  border-radius: 0.2rem;
+  background: #050505;
+  transform: translate(-50%, -50%);
+}
+
+.protect-button__cell {
+  display: grid;
+  min-width: 7.8rem;
+  min-height: 3.65rem;
+  place-items: center;
+  border-radius: 0.56rem;
+  background: #1f1f1f;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.protect-button:hover .protect-button__cell,
+.protect-button:focus-visible .protect-button__cell {
+  background: #000000;
+  transform: translateY(-0.08rem);
+}
+
+.protect-stage {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.7fr) minmax(13rem, 0.8fr) minmax(12rem, 0.7fr);
+  gap: clamp(1rem, 2.8vw, 2.4rem);
+  align-items: center;
+}
+
+.preview-card {
+  position: relative;
+  min-height: clamp(20rem, 32vw, 30rem);
+  overflow: hidden;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.14);
+  border-radius: 0.9rem;
+  background: #0d0d0d;
+}
+
+.preview-card img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.preview-card.has-image img {
+  opacity: 1;
+}
+
+.preview-card--output::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.24) 0.035rem, transparent 0.0475rem),
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  background-size: 0.4rem 0.4rem, auto;
+  mix-blend-mode: screen;
+  opacity: 0.035;
+  animation: protect-scan 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.preview-card--output.has-image::after {
+  opacity: 0;
+}
+
+.preview-label {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 2;
+  padding: 0.42rem 0.56rem;
+  border: 0.0625rem solid rgba(245, 245, 240, 0.18);
+  background: rgba(5, 5, 5, 0.72);
+  color: rgba(245, 245, 240, 0.8);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.interference-field {
+  position: relative;
+  display: grid;
+  min-height: 24rem;
+  place-items: center;
+  overflow: hidden;
+  border: 0.0625rem solid rgba(245, 245, 240, 0.1);
+  border-radius: 999rem;
+  background:
+    radial-gradient(circle, transparent 0 22%, rgba(245, 245, 240, 0.09) 22.5% 23%, transparent 23.5% 31%, rgba(245, 245, 240, 0.08) 31.5% 32%, transparent 32.5%),
+    radial-gradient(circle, rgba(245, 245, 240, 0.14) 0.035rem, transparent 0.0475rem);
+  background-size: auto, 0.48rem 0.48rem;
+}
+
+.interference-field span {
+  position: absolute;
+  width: 72%;
+  height: 0.0625rem;
+  background: linear-gradient(90deg, transparent, rgba(245, 245, 240, 0.86), transparent);
+  animation: protect-ring 4s ease-in-out infinite;
+}
+
+.interference-field span:nth-child(2) {
+  width: 52%;
+  transform: rotate(58deg);
+  animation-delay: -1.2s;
+}
+
+.interference-field span:nth-child(3) {
+  width: 64%;
+  transform: rotate(-38deg);
+  animation-delay: -2.1s;
+}
+
+.result-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.8rem;
+}
+
+.result-panel div,
+.download-link {
+  display: grid;
+  gap: 0.42rem;
+  min-height: 5.8rem;
+  padding: 1rem;
+  border: 0.0625rem solid rgba(245, 245, 240, 0.12);
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.result-panel span {
+  color: rgba(245, 245, 240, 0.48);
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.result-panel strong {
+  align-self: end;
+  color: #f5f5f0;
+  font-size: 1.05rem;
+}
+
+.download-link {
+  align-content: center;
+  color: #050505;
+  background: #f5f5f0;
+  font-family: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+}
+
+.download-link[hidden] {
+  display: none;
+}
+
+.protect-note {
+  width: min(100%, 86rem);
+  margin: 0 auto;
+  color: rgba(245, 245, 240, 0.46);
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+@keyframes protect-shift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 0.72rem -0.48rem, -0.42rem 0.32rem;
+  }
+}
+
+@keyframes protect-scan {
+  0%,
+  38% {
+    transform: translateX(-120%);
+  }
+
+  68%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes protect-ring {
+  0%,
+  100% {
+    opacity: 0.16;
+    transform: rotate(0deg) scaleX(0.42);
+  }
+
+  50% {
+    opacity: 0.76;
+    transform: rotate(180deg) scaleX(1);
+  }
+}
+
+@media (max-width: 56rem) {
+  .protect-hero,
+  .protect-stage,
+  .result-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .protect-copy h1 {
+    max-width: 7.8ch;
+  }
+
+  .control-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .interference-field {
+    min-height: 10rem;
+    border-radius: 0.9rem;
+  }
+}

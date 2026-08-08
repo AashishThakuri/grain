@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grain protect</title>
+    <link rel="icon" type="image/png" href="/brand/grain-logo.png">
+  </head>
+  <body>
+    <main class="protect-shell">
+      <header class="protect-nav">
+        <a class="protect-brand" href="/" aria-label="grain home">
+          <img src="/brand/grain-logo.png" alt="">
+          <img src="/brand/grain-wordmark.png" alt="grain">
+        </a>
+        <span class="protect-status" id="api-status">Backend standby</span>
+      </header>
+
+      <section class="protect-hero" aria-labelledby="protect-title">
+        <div class="protect-copy">
+          <p class="protect-kicker">Evidence-gated image compiler</p>
+          <h1 id="protect-title">Upload. Protect. Test. Export.</h1>
+          <p>
+            Compile a visually matched research export, measure the change, then test it against the exact image
+            model and preprocessing path you care about.
+          </p>
+        </div>
+
+        <form id="protect-form" class="protect-console">
+          <label class="drop-zone" id="drop-zone">
+            <input id="image-input" name="image" type="file" accept="image/png,image/jpeg,image/webp" required>
+            <span class="drop-zone__mark"></span>
+            <strong>Drop image here</strong>
+            <small>PNG, JPEG, or WebP up to 50 MB. Processing happens through your local backend.</small>
+          </label>
+
+          <div class="control-grid">
+            <label>
+              <span>Protection mode</span>
+              <select id="mode-input" name="mode">
+                <option value="pixel" selected>Fidelity baseline</option>
+                <option value="light">Light</option>
+                <option value="strong">Strong</option>
+                <option value="resistance">Transform stress research</option>
+                <option value="max">Maximum bounded research</option>
+                <option value="semantic-mesh">Visible semantic mesh</option>
+                <option value="hard-refusal">Visible hard refusal</option>
+                <option value="consent-frame">Visible consent frame</option>
+              </select>
+            </label>
+            <label>
+              <span>Export format</span>
+              <select id="format-input" name="format">
+                <option value="png" selected>PNG</option>
+                <option value="jpeg">High-quality JPEG</option>
+              </select>
+            </label>
+          </div>
+
+          <button class="protect-button" type="submit">
+            <span class="protect-button__cell">Protect</span>
+            <span class="protect-button__cell">Download</span>
+          </button>
+        </form>
+      </section>
+
+      <section class="protect-stage" aria-label="Protection preview">
+        <div class="preview-card preview-card--source">
+          <span class="preview-label">Original</span>
+          <img id="source-preview" alt="">
+        </div>
+        <div class="interference-field" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="preview-card preview-card--output">
+          <span class="preview-label">GRAIN protected</span>
+          <img id="output-preview" alt="">
+        </div>
+      </section>
+
+      <section class="result-panel" aria-label="Protection result">
+        <div>
+          <span>Visible delta</span>
+          <strong id="visible-delta">Waiting</strong>
+        </div>
+        <div>
+          <span>Layer energy</span>
+          <strong id="layer-energy">Waiting</strong>
+        </div>
+        <div>
+          <span>Mode profile</span>
+          <strong id="compression-survival">Waiting</strong>
+        </div>
+        <div>
+          <span>Consent signal</span>
+          <strong id="consent-signal">Waiting</strong>
+        </div>
+        <a id="download-link" class="download-link" hidden>Download protected image</a>
+      </section>
+
+      <p class="protect-note">
+        The fidelity baseline passed the current local visual gate. That gate measures visual quality and common
+        preprocessing only; it does not prove that a named AI editor will fail. Visible consent modes communicate
+        intent but cannot force an independent model to obey it.
+      </p>
+    </main>
+
+    <script type="module" src="/src/protect.js"></script>
+  </body>
+</html>

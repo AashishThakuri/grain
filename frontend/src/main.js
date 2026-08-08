@@ -31,8 +31,8 @@ const HERO_LAYOUTS = [
   { widthRem: 40, titleCh: 19.5, baseTitleRem: 4.1, bodyRem: 34, baseBodyRem: 0.96 },
 ]
 const MOBILE_HERO_LAYOUTS = [
-  { widthRem: 21, titleCh: 10.8, baseTitleRem: 3.45, bodyRem: 20, baseBodyRem: 0.9 },
-  { widthRem: 24, titleCh: 13.8, baseTitleRem: 3.05, bodyRem: 22, baseBodyRem: 0.88 },
+  { widthRem: 19.5, titleCh: 10.6, baseTitleRem: 3.2, bodyRem: 19.5, baseBodyRem: 0.88 },
+  { widthRem: 22, titleCh: 13.2, baseTitleRem: 2.92, bodyRem: 21.5, baseBodyRem: 0.84 },
 ]
 const STORY_SECTIONS = ['Problem', 'How It Works', 'Testing', 'Product', 'Security']
 const STORY_FRAMES = [
@@ -850,7 +850,7 @@ async function init() {
       : getHeroVisualBounds()
     const heroCenter = (heroRect.left + heroRect.right) / 2
     const placeLeft = heroCenter > window.innerWidth * 0.5
-    const sideInset = window.innerWidth < 780 ? 18 : 38
+    const sideInset = window.innerWidth < 700 ? 18 : 38
     const navHeight = siteNav.hidden ? 84 : siteNav.getBoundingClientRect().height
     const top = Math.max(navHeight + 44, window.innerHeight * 0.18)
 
@@ -903,15 +903,16 @@ async function init() {
     const proof = proofReadout.textContent.trim()
     const words = title.split(/\s+/).filter(Boolean)
     const longestWord = words.reduce((longest, word) => Math.max(longest, word.length), 0)
-    const isSmall = window.innerWidth < 780
+    const isSmall = window.innerWidth < 700
+    const isCompact = isSmall && window.innerHeight < 740
     const titlePressure =
       Math.max(0, title.length - 30) * 0.014 +
       Math.max(0, words.length - 4) * 0.048 +
       Math.max(0, longestWord - 13) * 0.022
     const bodyPressure = Math.max(0, body.length + proof.length - 175) * 0.0016
     const widthRelief = Math.max(0, widthRem - 30) * 0.004
-    const titleScale = clamp(1 - titlePressure + widthRelief, isSmall ? 0.66 : 0.52, 1)
-    const bodyScale = clamp(1 - bodyPressure, isSmall ? 0.82 : 0.88, 1)
+    const titleScale = clamp(1 - titlePressure + widthRelief, isCompact ? 0.58 : isSmall ? 0.66 : 0.52, 1)
+    const bodyScale = clamp(1 - bodyPressure, isCompact ? 0.76 : isSmall ? 0.82 : 0.88, 1)
     const titleExtraCh =
       Math.max(0, title.length - 34) * 0.24 +
       Math.max(0, longestWord - 12) * 0.42
@@ -919,9 +920,9 @@ async function init() {
     return {
       titleRem: layout.baseTitleRem * titleScale,
       bodyRem: layout.baseBodyRem * bodyScale,
-      proofRem: clamp(layout.baseBodyRem * bodyScale * 0.78, isSmall ? 0.62 : 0.66, 0.82),
-      leading: clamp(1 + (1 - titleScale) * 0.12, 1, 1.1),
-      titleCh: Math.min(layout.titleCh + titleExtraCh, isSmall ? 17 : 29),
+      proofRem: clamp(layout.baseBodyRem * bodyScale * 0.78, isCompact ? 0.56 : isSmall ? 0.62 : 0.66, 0.82),
+      leading: clamp(1 + (1 - titleScale) * (isCompact ? 0.16 : 0.12), 1, 1.14),
+      titleCh: Math.min(layout.titleCh + titleExtraCh, isCompact ? 15.5 : isSmall ? 17 : 29),
     }
   }
 
@@ -944,10 +945,11 @@ async function init() {
   function buildCopyCandidates() {
     const vw = window.innerWidth
     const vh = window.innerHeight
-    const isSmall = vw < 780
-    const margin = isSmall ? 22 : 34
+    const isSmall = vw < 700
+    const isCompact = isSmall && vh < 740
+    const margin = isSmall ? (vw < 390 ? 16 : 20) : 34
     const navHeight = siteNav.hidden ? 84 : siteNav.getBoundingClientRect().height
-    const topY = navHeight + margin + 10
+    const topY = navHeight + margin
     const layouts = getResponsiveHeroLayouts(isSmall)
     const candidates = []
 
@@ -965,7 +967,10 @@ async function init() {
           vw - margin - width,
         ].map(left => clamp(left, margin, vw - margin - width)))
       const yPositions = isSmall
-        ? uniqueNumbers([topY, vh * 0.48, vh * 0.64].map(top => clamp(top, topY, vh * 0.72)))
+        ? uniqueNumbers(
+          (isCompact ? [topY, vh * 0.38, vh * 0.52] : [topY, vh * 0.42, vh * 0.57])
+            .map(top => clamp(top, topY, vh * (isCompact ? 0.56 : 0.66)))
+        )
         : uniqueNumbers([
           topY,
           vh * 0.3,
@@ -990,9 +995,10 @@ async function init() {
   }
 
   function keepHeroInsideViewport() {
-    const sideLimit = window.innerWidth < 780 ? 18 : 34
-    const topLimit = (siteNav.hidden ? 84 : siteNav.getBoundingClientRect().height) + 16
-    const bottomLimit = window.innerHeight - 92
+    const isSmall = window.innerWidth < 700
+    const sideLimit = isSmall ? (window.innerWidth < 390 ? 14 : 18) : 34
+    const topLimit = (siteNav.hidden ? 84 : siteNav.getBoundingClientRect().height) + (isSmall ? 12 : 16)
+    const bottomLimit = window.innerHeight - (isSmall ? 82 : 92)
     const bounds = getHeroVisualBounds()
     const shiftX =
       Math.max(0, sideLimit - bounds.left) -
@@ -1099,9 +1105,10 @@ async function init() {
           (total, imageBound) => total + intersectionArea(protectedCandidate, imageBound),
           0
         )
-        const topLimit = (siteNav.hidden ? 84 : siteNav.getBoundingClientRect().height) + 16
-        const bottomLimit = window.innerHeight - 92
-        const sideLimit = window.innerWidth < 780 ? 18 : 34
+        const isSmall = window.innerWidth < 700
+        const topLimit = (siteNav.hidden ? 84 : siteNav.getBoundingClientRect().height) + (isSmall ? 12 : 16)
+        const bottomLimit = window.innerHeight - (isSmall ? 82 : 92)
+        const sideLimit = isSmall ? (window.innerWidth < 390 ? 14 : 18) : 34
         const outsidePenalty =
           Math.max(0, sideLimit - measured.left) +
           Math.max(0, measured.right - (window.innerWidth - sideLimit)) +

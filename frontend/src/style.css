@@ -1323,7 +1323,7 @@ body.is-ready .story-progress {
   background: transparent;
   color: #ffffff;
   font-family: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
-  font-size: 0.74rem;
+  font-size: 0.875rem;
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0;
@@ -1344,8 +1344,8 @@ body.is-ready .story-progress {
   z-index: 0;
   top: 50%;
   left: 50%;
-  width: 0.9375rem;
-  height: 1.9375rem;
+  width: 1rem;
+  height: 2.25rem;
   background: #232323;
   transform: translate(-50%, -50%);
   transition: background 0.22s ease;
@@ -1356,8 +1356,8 @@ body.is-ready .story-progress {
   z-index: 1;
   display: grid;
   place-items: center;
-  width: 5.7rem;
-  height: 2.625rem;
+  width: 7.2rem;
+  height: 4.5rem;
   padding: 0;
   border-radius: 0.48rem;
   background: #232323;
@@ -1369,7 +1369,7 @@ body.is-ready .story-progress {
 }
 
 .scroll-toggle__segment--start {
-  width: 6.5rem;
+  width: 9.95rem;
 }
 
 .scroll-toggle[hidden] {

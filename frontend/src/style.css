@@ -1339,16 +1339,7 @@ body.is-ready .story-progress {
 }
 
 .scroll-toggle::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  width: 0.625rem;
-  height: 2.125rem;
-  background: #232323;
-  transform: translate(-50%, -50%);
-  transition: background 0.22s ease;
+  display: none;
 }
 
 .scroll-toggle__segment {
@@ -1372,6 +1363,20 @@ body.is-ready .story-progress {
   width: 6.25rem;
 }
 
+.scroll-toggle__segment:first-child::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: -0.4375rem;
+  width: 0.625rem;
+  height: 2.125rem;
+  background: #232323;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: background 0.22s ease;
+}
+
 .scroll-toggle[hidden] {
   display: none;
 }
@@ -1388,9 +1393,9 @@ body.is-ready .scroll-toggle {
   background: #000000;
 }
 
-.scroll-toggle:hover::before,
-.scroll-toggle:focus-visible::before,
-.scroll-toggle.active::before {
+.scroll-toggle:hover .scroll-toggle__segment:first-child::after,
+.scroll-toggle:focus-visible .scroll-toggle__segment:first-child::after,
+.scroll-toggle.active .scroll-toggle__segment:first-child::after {
   background: #000000;
 }
 

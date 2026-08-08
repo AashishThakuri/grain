@@ -4,13 +4,60 @@
   box-sizing: border-box;
 }
 
-body { 
+body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   background: #ffffff;
   font-family: Inter, "SF Pro Display", "Segoe UI", Arial, Helvetica, sans-serif;
   color: #141414;
+}
+
+.device-notice {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: none;
+  align-content: center;
+  padding: 2rem;
+  background: #111111;
+  color: #ffffff;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+}
+
+.device-notice__logo {
+  width: 3.75rem;
+  height: 3.75rem;
+  margin-bottom: 2.5rem;
+  filter: invert(1);
+  object-fit: contain;
+}
+
+.device-notice__eyebrow {
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, 0.58);
+  font-family: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.device-notice h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: 2.8rem;
+  font-weight: 720;
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.device-notice p:last-child {
+  max-width: 26rem;
+  margin: 1.5rem 0 0;
+  color: rgba(255, 255, 255, 0.64);
+  font-family: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 .loading-screen {
@@ -1437,6 +1484,12 @@ body.is-ready .scroll-toggle {
 
   .story-progress {
     right: 1.35rem;
+  }
+}
+
+@media (max-width: 70rem) {
+  .device-notice {
+    display: grid;
   }
 }
 

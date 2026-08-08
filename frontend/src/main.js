@@ -310,9 +310,9 @@ async function init() {
   scrollToggleBtn.addEventListener('click', (event) => {
     const action = event.target.closest('.scroll-toggle__segment')?.dataset.action
 
-    if (action !== 'scroll' && action !== 'start') return
+    if (action !== 'scroll' && action !== 'stop') return
 
-    autoScroll = !autoScroll
+    autoScroll = action === 'scroll'
     scrollToggleBtn.classList.toggle('active', autoScroll)
   })
 
